@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            background-color: #eee;
+            padding: 0.5rem 1rem;
+            margin-bottom: 2rem;
+            list-style: none; /* Remove default list styling */
+            padding: 10px 16px;
+            list-style: none;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+        .breadcrumb li {
+            display: inline;
+            font-size: 14px;
+        }
+        .breadcrumb li+li:before {
+            padding: 8px;
+            color: black;
+            content: "/\00a0";
+        }
+        .breadcrumb li a {
+            color: #0275d8;
+            text-decoration: none;
+        }
+        .breadcrumb .active{
+          color: grey;
+        }
+
+        .product-detail {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex; /* Use flexbox for layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 20px; /* Spacing between items */
+        }
+
+        .product-detail img {
+            max-width: 40%; /* Image takes up half the width */
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .product-detail div{
+            flex: 1; /* Other content takes up remaining width */
+        }
+
+        .product-detail h2 {
+            margin-top: 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .product-detail {
+                flex-direction: column; /* Stack items vertically on smaller screens */
+                align-items: center; /* Center items horizontally */
+            }
+            .product-detail img{
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Product Detail</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/search">Search Results</a>
+        </nav>
+    </header>
+
+    <main>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/search">Search Results</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ product.product_name }}</li>
+            </ol>
+        </nav>
+
+        <div class="product-detail">
+            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.description }}">
+            <div>
+                <h2>{{ product.product_name }}</h2>
+                <p><strong>Product No:</strong> {{ product.product_no }}</p>
+                <p><strong>Price:</strong> ${{ product.price }}</p>
+                <p><strong>Category:</strong> {{ product.category }}</p>
+                <p><strong> Description:</strong> {{ product.description }}</p>
+
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Your Website</p>
+        </footer>
+    </main>
+
+</body>
+</html>

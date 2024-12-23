@@ -13,6 +13,7 @@ db = SQLAlchemy(app)
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # Otomatik artan birincil anahtar
     product_no = db.Column(db.String(50), unique=True, nullable=False)  # Ürün numarası
+    product_name = db.Column(db.String(50), unique=True, nullable=False)  # Ürün numarası
     description = db.Column(db.String(255), nullable=False)  # Ürün açıklaması
     price = db.Column(db.Float, nullable=False)  # Ürün fiyatı
     image = db.Column(db.String(255), nullable=True)  # Ürün resmi (opsiyonel)
@@ -27,18 +28,20 @@ if __name__ == '__main__':
         db.create_all()  # Veritabanı ve tabloları oluşturur
         
         # Ürünleri veritabanına ekle
-        products = [
-            {"product_no": "sweatshirt", "description": "kadın" "Product 1", "price": 10.99, "image": "product1.jpg", "category": "Category A"},
-            {"product_no": "2", "description": "Product 2", "price": 15.99, "image": "product2.jpg", "category": "Category B"},
-            {"product_no": "3", "description": "Product 3", "price": 20.99, "image": "product3.jpg", "category": "Category A"},
-            {"product_no": "4", "description": "Product 4", "price": 25.99, "image": "product4.jpg", "category": "Category C"},
-            {"product_no": "5", "description": "Product 5", "price": 30.99, "image": "product5.jpg", "category": "Category B"},
-            {"product_no": "6", "description": "Product 6", "price": 35.99, "image": "product6.jpg", "category": "Category C"},
-            {"product_no": "7", "description": "Product 7", "price": 40.99, "image": "product7.jpg", "category": "Category A"},
-            {"product_no": "8", "description": "Product 8", "price": 45.99, "image": "product8.jpg", "category": "Category B"},
-            {"product_no": "9", "description": "Product 9", "price": 50.99, "image": "product9.jpg", "category": "Category C"},
-            {"product_no": "10", "description": "Product 10", "price": 55.99, "image": "product10.jpg", "category": "Category A"},
-        ]
+#         products = [
+           
+#     {"product_no": "sweatshirt", "description": "Kadın sweatshirt, rahat ve şık tasarım.", "price": 10.99, "image": "product0.jpg", "category": "Category A"},
+#     {"product_no": "etek", "description": "Kadın eteği, günlük kullanım için ideal.", "price": 15.99, "image": "product2.jpg", "category": "Category B"},
+#     {"product_no": "pantolon", "description": "Erkek pantolonu, rahat ve dayanıklı.", "price": 20.99, "image": "product3.jpg", "category": "Category A"},
+#     {"product_no": "ceket", "description": "Şık erkek ceketi, her ortamda kullanıma uygun.", "price": 25.99, "image": "product4.jpg", "category": "Category C"},
+#     {"product_no": "elbise", "description": "Kadın elbisesi, zarif tasarım ve rahat kumaş.", "price": 30.99, "image": "product5.jpg", "category": "Category B"},
+#     {"product_no": "mont", "description": "Kışlık mont, soğuk hava için mükemmel koruma.", "price": 35.99, "image": "product6.jpg", "category": "Category C"},
+#     {"product_no": "gömlek", "description": "Erkek gömleği, günlük ve iş kullanımı için uygun.", "price": 40.99, "image": "product7.jpg", "category": "Category A"},
+#     {"product_no": "ayakkabı", "description": "Spor ayakkabı, rahatlık ve şıklık bir arada.", "price": 45.99, "image": "product8.jpg", "category": "Category B"},
+#     {"product_no": "çanta", "description": "Kadın çantası, günlük kullanım için ideal.", "price": 50.99, "image": "product9.jpg", "category": "Category C"},
+#     {"product_no": "şapka", "description": "Unisex şapka, güneşten korunmak için şık bir seçenek.", "price": 55.99, "image": "product10.jpg", "category": "Category A"},
+# ]
+
 
         for product_data in products:
             product = Product(**product_data)

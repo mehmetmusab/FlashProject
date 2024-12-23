@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ürünler</title>
+  <style>
+    /* style.css içeriği buraya gelecek */
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    .search-form {
+      margin-top: 1rem;
+    }
+
+    .search-form input[type="text"] {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      margin-right: 0.5rem;
+    }
+
+    .search-form button {
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+        gap: 20px;
+    }
+
+    .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden; /* Resimlerin taşmasını engeller */
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* Hafif gölge */
+        transition: transform 0.2s ease; /* Hover efekti için geçiş */
+    }
+
+    .product-card:hover {
+        transform: scale(1.02); /* Hafif büyüme efekti */
+        box-shadow: 4px 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px; /* Sabit yükseklik */
+        object-fit: cover; /* Resmi kutuya sığdırır */
+    }
+
+    .product-info {
+        padding: 1rem;
+        text-align: center;
+    }
+        .product-info strong{
+            display:block;
+            margin-bottom: 0.5rem;
+        }
+
+    @media (max-width: 768px) {
+        .product-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Items
+
+    </h1>
+    <form action="{{ url_for('search') }}" method="get" class="search-form">
+      <input type="text" name="q" placeholder="Ürün ara..." required>
+      <button type="submit">Ara</button>
+    </form>
+  </header>
+  <main>
+    <section class="product-grid">
+      {% for product in products %}
+      <article class="product-card">
+        <a href="{{ url_for('product_detail', product_id=product.id) }}">
+          <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+        </a>
+        <div class="product-info">
+          <strong>{{ product.product_name }}</strong>
+          <span>${{ product.price }}</span>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
