@@ -27,27 +27,25 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Veritabanı ve tabloları oluşturur
         
-        # Ürünleri veritabanına ekle
-#         products = [
-           
-#     {"product_no": "sweatshirt", "description": "Kadın sweatshirt, rahat ve şık tasarım.", "price": 10.99, "image": "product0.jpg", "category": "Category A"},
-#     {"product_no": "etek", "description": "Kadın eteği, günlük kullanım için ideal.", "price": 15.99, "image": "product2.jpg", "category": "Category B"},
-#     {"product_no": "pantolon", "description": "Erkek pantolonu, rahat ve dayanıklı.", "price": 20.99, "image": "product3.jpg", "category": "Category A"},
-#     {"product_no": "ceket", "description": "Şık erkek ceketi, her ortamda kullanıma uygun.", "price": 25.99, "image": "product4.jpg", "category": "Category C"},
-#     {"product_no": "elbise", "description": "Kadın elbisesi, zarif tasarım ve rahat kumaş.", "price": 30.99, "image": "product5.jpg", "category": "Category B"},
-#     {"product_no": "mont", "description": "Kışlık mont, soğuk hava için mükemmel koruma.", "price": 35.99, "image": "product6.jpg", "category": "Category C"},
-#     {"product_no": "gömlek", "description": "Erkek gömleği, günlük ve iş kullanımı için uygun.", "price": 40.99, "image": "product7.jpg", "category": "Category A"},
-#     {"product_no": "ayakkabı", "description": "Spor ayakkabı, rahatlık ve şıklık bir arada.", "price": 45.99, "image": "product8.jpg", "category": "Category B"},
-#     {"product_no": "çanta", "description": "Kadın çantası, günlük kullanım için ideal.", "price": 50.99, "image": "product9.jpg", "category": "Category C"},
-#     {"product_no": "şapka", "description": "Unisex şapka, güneşten korunmak için şık bir seçenek.", "price": 55.99, "image": "product10.jpg", "category": "Category A"},
-# ]
+        # Eğer veritabanında ürün yoksa, ürünleri ekle
+        if not Product.query.first():
+            products = [
+                {"product_no": "1", "product_name": "Classic Crewneck Sweatshirt", "price": 15.99, "image": "product1.jpg", "category": "Category A", "description": "A timeless and comfortable crewneck sweatshirt..."},
+                {"product_no": "2", "product_name": "Flowing Midi Skirt", "price": 15.99, "image": "product2.jpg", "category": "Category B", "description": "A stylish and versatile midi skirt..."},
+                {"product_no": "3", "product_name": "Slim Fit Chino Trousers", "price": 20.99, "image": "product3.jpg", "category": "Category A", "description": "A pair of modern and stylish slim fit chino trousers..."},
+                {"product_no": "4", "product_name": "Elegant Evening Dress", "price": 25.99, "image": "product4.jpg", "category": "Category C", "description": "A sophisticated and elegant evening dress..."},
+                {"product_no": "5", "product_name": "Multi-Purpose Utility Backpack", "price": 30.99, "image": "product5.jpg", "category": "Category B", "description": "A versatile and durable utility backpack..."},
+                {"product_no": "6", "product_name": "Premium Leather Wallet", "price": 35.99, "image": "product6.jpg", "category": "Category C", "description": "A high-quality and stylish leather wallet..."},
+                {"product_no": "7", "product_name": "Comfortable Cotton T-Shirt", "price": 40.99, "image": "product7.jpg", "category": "Category A", "description": "A classic and comfortable cotton t-shirt..."},
+                {"product_no": "8", "product_name": "Stylish Canvas Tote Bag", "price": 45.99, "image": "product8.jpg", "category": "Category B", "description": "A trendy and practical canvas tote bag..."},
+                {"product_no": "9", "product_name": "Modern Stainless Steel Watch", "price": 50.99, "image": "product9.jpg", "category": "Category C", "description": "A sleek and modern stainless steel watch..."},
+                {"product_no": "10", "product_name": "Warm Wool Beanie Hat", "price": 55.99, "image": "product10.jpg", "category": "Category A", "description": "A warm and cozy wool beanie hat..."}
+            ]
+            
+            for product_data in products:
+                product = Product(**product_data)
+                db.session.add(product)
 
+            db.session.commit()  # Değişiklikleri kaydet
+            print("Ürünler başarıyla eklendi.")
 
-        for product_data in products:
-            product = Product(**product_data)
-            db.session.add(product)
-
-        db.session.commit()  # Değişiklikleri kaydet
-        print("Ürünler başarıyla eklendi.")
-
-    app.run(debug=True)
