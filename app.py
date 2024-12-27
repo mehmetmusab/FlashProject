@@ -81,4 +81,18 @@ if __name__ == '__main__':
             db.session.commit()  # Değişiklikleri kaydet
             print("Ürünler başarıyla eklendi.")
 
+# Veritabanı modeli
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_no = db.Column(db.String(50), nullable=False)
+    product_name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    price = db.Column(db.Float, nullable=False)
+    image = db.Column(db.String(200), nullable=True)
+    category = db.Column(db.String(50), nullable=False)
+
+# Ana dosya olarak çalıştırıldığında
+if __name__ == "__main__":
+    app.run(debug=True)
+
     app.run(debug=True)
