@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from models import db, Product  # db ve model import ediliyor
+from models import db, Product  # db ve Product modelini models.py'den import ediyoruz
 
 app = Flask(__name__)
 
@@ -9,16 +9,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Gereksiz uyarıları kap
 
 # Veritabanı bağlantısı
 db.init_app(app)
-
-# Veritabanı modeli
-class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    product_no = db.Column(db.String(50), nullable=False)
-    product_name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=True)
-    price = db.Column(db.Float, nullable=False)
-    image = db.Column(db.String(200), nullable=True)
-    category = db.Column(db.String(50), nullable=False)
 
 # Ana sayfa rotası
 @app.route('/')
@@ -53,7 +43,7 @@ if __name__ == '__main__':
         db.create_all()  # Veritabanı ve tablolar oluşturulacak
         
         # Eğer veritabanında ürün yoksa, ürünleri ekle
-        if not Product.query.first():
+        if not Product.query.first():  # Eğer veritabanında herhangi bir ürün yoksa
             products = [
                 {"product_no": "1", "product_name": "Classic Crewneck Sweatshirt", "price": 15.99, "image": "product1.jpg", "category": "Category A", "description": "A timeless and comfortable crewneck sweatshirt..."},
                 {"product_no": "2", "product_name": "Flowing Midi Skirt", "price": 15.99, "image": "product2.jpg", "category": "Category B", "description": "A stylish and versatile midi skirt..."},
@@ -75,3 +65,4 @@ if __name__ == '__main__':
             print("Ürünler başarıyla eklendi.")
 
     app.run(debug=True)  # Uygulama çalıştırılır
+
