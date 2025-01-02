@@ -4,6 +4,7 @@ from models import db, Product  # db ve Product modelini models.py'den import ed
 app = Flask(__name__)
 
 # Flask config ayarları
+app.config['SERVER_NAME'] = 'flashproject-330e.onrender.com'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///products.db'  # Veritabanı bağlantısı
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Gereksiz uyarıları kapat
 
@@ -11,7 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Gereksiz uyarıları kap
 db.init_app(app)
 
 # Ana sayfa rotası
-@app.route('https://flashproject-330e.onrender.com/')
+@app.route('/')
 def home():
     products = Product.query.all()  # Ürünleri al
     return render_template('home.html', products=products)
