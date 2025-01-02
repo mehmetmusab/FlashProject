@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from models import db, Product  # db ve Product modelini models.py'den import ediyoruz
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
 # Flask config ayarları
-app.config['SERVER_NAME'] = 'flashproject-330e.onrender.com'
+# app.config['SERVER_NAME'] = 'flashproject-330e.onrender.com'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///products.db'  # Veritabanı bağlantısı
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Gereksiz uyarıları kapat
 
@@ -66,30 +67,3 @@ if __name__ == '__main__':
             print("Ürünler başarıyla eklendi.")
             from flask_sqlalchemy import SQLAlchemy
     app.run(debug=True)
-    from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-# Flask uygulamasını başlatma
-app = Flask(__name__)
-
-# Veritabanı yapılandırması
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///products.db'  # Veritabanı adı ve URI'si
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # İzleme özelliği kapalı
-
-# SQLAlchemy ile Flask uygulamasını bağlama
-db = SQLAlchemy(app)
-
-# Veritabanı modeli
-class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    product_no = db.Column(db.String(50), nullable=False)
-    product_name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=True)
-    price = db.Column(db.Float, nullable=False)
-    image = db.Column(db.String(200), nullable=True)
-    category = db.Column(db.String(50), nullable=False)
-
-# Ana dosya olarak çalıştırıldığında
-if __name__ == "__main__":
-    app.run(debug=True)
-
