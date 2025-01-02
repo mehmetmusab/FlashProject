@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Gereksiz uyarıları kap
 db.init_app(app)
 
 # Ana sayfa rotası
-@app.route('/')
+@app.route('https://flashproject-330e.onrender.com/')
 def home():
     products = Product.query.all()  # Ürünleri al
     return render_template('home.html', products=products)
